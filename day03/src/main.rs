@@ -30,17 +30,15 @@ fn main() {
                         "" => {}
                         _ => {
                             for other in bank.substring(i, length).chars() {
-                                // TODO: Neater concatenation
-                                let concat = String::from(battery) + &String::from(other);
-
                                 // Convert the concatenated value to an integer
-                                let joltage: i32 = match concat.trim().parse() {
-                                    Ok(num) => num,
-                                    Err(e) => {
-                                        eprintln!("WARNING Failed to parse joltage: {}", e);
-                                        continue
-                                    }
-                                };
+                                let joltage: i32 =
+                                    match format!("{}{}", battery, other).trim().parse() {
+                                        Ok(num) => num,
+                                        Err(e) => {
+                                            eprintln!("WARNING Failed to parse joltage: {}", e);
+                                            continue;
+                                        }
+                                    };
 
                                 if joltage > max {
                                     max = joltage;
