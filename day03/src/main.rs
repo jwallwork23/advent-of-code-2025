@@ -29,9 +29,10 @@ fn main() {
                     match battery {
                         "" => {}
                         _ => {
+                            let subbattery = bank.substring(i, length);
 
                             // Part 1: iterate over other single characters
-                            for other in bank.substring(i, length).chars() {
+                            for other in subbattery.chars() {
                                 // Convert the concatenated value to an integer
                                 let joltage: i32 =
                                     match format!("{}{}", battery, other).trim().parse() {
@@ -48,7 +49,17 @@ fn main() {
                             }
 
                             // Part 2: iterate over other eleven characters
-                            // TODO
+                            if subbattery.len() < 11 {
+                                continue;
+                            }
+                            println!("DEBUG {}", subbattery);
+                            let mut vec = Vec::new();
+                            for other in subbattery.chars() {
+                                vec.push(other);
+                                println!("DEBUG {}", other);
+                            }
+                            // TODO: Loop over possible exclusions to calculate joltage
+                            //       Might be worth using recursion?
                         }
                     }
                 }
