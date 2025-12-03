@@ -19,16 +19,18 @@ fn main() {
 
     // Loop over codes in the input file
     for bank in contents.split("\n") {
-        let mut max: i32 = 0;
+        let mut max1: i32 = 0;
+        let mut max2: i32 = 0;
         match bank {
             "" => {} // Skip any empty strings
             _ => {
-                // println!("{}", bank);
                 let length = bank.len();
                 for (i, battery) in bank.split("").enumerate() {
                     match battery {
                         "" => {}
                         _ => {
+
+                            // Part 1: iterate over other single characters
                             for other in bank.substring(i, length).chars() {
                                 // Convert the concatenated value to an integer
                                 let joltage: i32 =
@@ -39,17 +41,21 @@ fn main() {
                                             continue;
                                         }
                                     };
-
-                                if joltage > max {
-                                    max = joltage;
+                                // Check if the joltage is a new maximum
+                                if joltage > max1 {
+                                    max1 = joltage;
                                 }
                             }
+
+                            // Part 2: iterate over other eleven characters
+                            // TODO
                         }
                     }
                 }
             }
         }
-        part1 = part1 + max;
+        part1 = part1 + max1;
+        part2 = part2 + max2;
     }
 
     println!("part 1: {}", part1);
