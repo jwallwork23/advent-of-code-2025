@@ -15,6 +15,7 @@ fn main() {
 
     // Loop over codes in the input file
     for bank in contents.split("\n") {
+        let mut max: i32 = 0;
         match bank {
             "" => {} // Skip any empty strings
             _ => {
@@ -27,13 +28,25 @@ fn main() {
                         _ => {
                             i = i + 1;  // TODO: Neater enumeration
                             for other in bank.substring(i, length).chars() {
-                                println!("{} {}", battery, other);
+                                // TODO: Neater concatenation
+                                let concat = String::from(battery) + &String::from(other);
+
+                                // Convert the concatenated value to an integer
+                                let joltage: i32 = match concat.trim().parse() {
+                                    Ok(num) => num,
+                                    Err(_) => continue, // TODO: Error handling
+                                };
+
+                                if joltage > max {
+                                    max = joltage;
+                                }
                             }
                         }
                     }
                 }
             }
         }
+        part1 = part1 + max;
     }
 
     println!("part 1: {}", part1);
