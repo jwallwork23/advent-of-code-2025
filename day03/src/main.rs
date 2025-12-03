@@ -38,7 +38,10 @@ fn main() {
                                 // Convert the concatenated value to an integer
                                 let joltage: i32 = match concat.trim().parse() {
                                     Ok(num) => num,
-                                    Err(_) => continue, // TODO: Error handling
+                                    Err(e) => {
+                                        eprintln!("WARNING Failed to parse joltage: {}", e);
+                                        continue
+                                    }
                                 };
 
                                 if joltage > max {

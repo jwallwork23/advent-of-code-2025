@@ -26,13 +26,19 @@ fn main() {
                     // Convert the start value to an integer
                     let start: i64 = match entry.substring(0, num).trim().parse() {
                         Ok(num) => num,
-                        Err(_) => continue, // TODO: Error handling
+                        Err(e) => {
+                            eprintln!("WARNING Failed to parse start value: {}", e);
+                            continue
+                        }
                     };
 
                     // Convert the end value to an integer
                     let end: i64 = match entry.substring(num + 1, entry.len()).trim().parse() {
                         Ok(num) => num,
-                        Err(_) => continue, // TODO: Error handling
+                        Err(e) => {
+                            eprintln!("WARNING Failed to parse end value: {}", e);
+                            continue
+                        }
                     };
 
                     // Loop over the range

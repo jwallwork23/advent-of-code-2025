@@ -31,13 +31,19 @@ fn main() {
                 let direction: i32 = match entry.substring(0, 1) {
                     "L" => -1,
                     "R" => 1,
-                    _ => continue, // TODO: Error handling
+                    _ => {
+                        eprintln!("WARNING Failed to parse direction");
+                        continue
+                    }
                 };
 
                 // Deduce the magnitude
                 let mut magnitude: i32 = match entry.substring(1, entry.len()).trim().parse() {
                     Ok(num) => num,
-                    Err(_) => continue, // TODO: Error handling
+                    Err(e) => {
+                        eprintln!("WARNING Failed to parse magnitude: {}", e);
+                        continue
+                    }
                 };
 
                 // Adjust magnitude modulo 100
